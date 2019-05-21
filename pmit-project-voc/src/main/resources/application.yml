@@ -1,0 +1,18 @@
+
+
+# ¶Ë¿Ú
+server:
+  port: 7008
+  #eureka¿Í»§¶ËÅäÖÃ
+eureka:
+  instance:
+    hostname: localhost
+    statuspageUrl: http://localhost:7008/index
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
+
+spring:
+  application:
+    name: pmit-project-voc

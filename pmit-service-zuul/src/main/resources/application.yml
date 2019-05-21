@@ -1,0 +1,20 @@
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+server:
+  port: 8769
+spring:
+  application:
+    name: pmit-service-zuul
+
+# 自定义请求分发
+zuul:
+  routes:
+    api-a:
+      path: /project/**
+      serviceId: pmit-project-prjmanager
+    api-b:
+      path: /system/**
+      serviceId: pmit-system-manager

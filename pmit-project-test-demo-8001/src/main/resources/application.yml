@@ -1,0 +1,19 @@
+
+
+
+# ¶Ë¿Ú
+server:
+  port: 8001
+  #eureka¿Í»§¶ËÅäÖÃ
+eureka:
+  instance:
+    hostname: localhost
+    statuspageUrl: http://localhost:8001/index
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
+
+spring:
+  application:
+    name: pmit-project-test-demo

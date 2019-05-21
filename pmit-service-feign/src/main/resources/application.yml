@@ -1,0 +1,18 @@
+
+
+
+server:
+  port: 7006
+eureka:
+  instance:
+    hostname: localhost
+    statuspageUrl: http://localhost:7006/index
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
+spring:
+  application:
+    name: pmit-system-feign
+
+

@@ -1,0 +1,17 @@
+
+# �˿�
+server:
+  port: 7007
+  #eureka�ͻ�������
+eureka:
+  instance:
+    hostname: localhost
+    statuspageUrl: http://localhost:7007/index
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
+
+spring:
+  application:
+    name: pmit-system-common

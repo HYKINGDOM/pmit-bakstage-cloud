@@ -1,0 +1,46 @@
+spring:
+  application:
+    name: pmit-service-admin
+  profiles:
+    active:
+    - secure
+server:
+  port: 8788
+
+
+eureka:   #<1>
+  instance:
+    leaseRenewalIntervalInSeconds: 10
+    health-check-url-path: /actuator/health
+  client:
+    # client 拉取Server 注册信息的频率
+    registryFetchIntervalSeconds: 5
+    serviceUrl:
+      defaultZone: ${EUREKA_SERVICE_URL:http://localhost:8761}/eureka/
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"  #<2>
+  endpoint:
+    health:
+      show-details: ALWAYS
+
+
+---
+spring:
+  profiles: insecure
+
+---
+spring:
+  profiles: secure
+  security:
+    user:
+      name: admin
+      password: 1234
+eureka:
+  instance:
+    metadata-map:
+      user.name: admin
+      user.password: 1234

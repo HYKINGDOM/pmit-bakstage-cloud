@@ -1,0 +1,35 @@
+
+
+# 端口
+server:
+  port: 8761
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    # 服务端地址
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+  server:
+    # 关闭response 缓存
+    use-read-only-response-cache: false
+    # readWriteCacheMap 过期时间
+    response-cache-auto-expiration-in-seconds: 60
+    # 开启server自我保护功能 建议只在 开发测试环境中开启
+    enable-self-preservation: false
+# 模块名称
+spring:
+  application:
+    name: pmit_service_eureka
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
