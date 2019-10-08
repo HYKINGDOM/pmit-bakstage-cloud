@@ -1,0 +1,39 @@
+
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    serviceUrl:
+      defaultZone: http://pmit:pmit@pmit-service-eureka:8761/eureka/
+
+
+
+spring:
+  rabbitmq:
+    host: rabbitmq
+    port: 5672
+    username: admin
+    password: admin
+    # 虚拟主机配置 要与该账户在rabbitMQ的配置相同
+    virtual-host: /
+    template:
+      retry:
+        enabled: true
+      # 触发returnedMessage回调必须设置mandatory=true, 否则Exchange没有找到Queue就会丢弃掉消息, 而不会触发回调
+      mandatory: true
+    listener:
+      direct:
+        retry:
+          enabled: true  # 开始失败重试
+          max-attempts: 5
+          initial-interval: 5000 # 重试间隔时间
+      simple:
+        # 设置应答模式  NONE:自动回调,AUTO:自动检测异常或者超时事件，如果发生则返回noack，消息自动回到队尾，MANUAL:手动回调
+        acknowledge-mode: AUTO
+        # 设置消息最大值
+        prefetch: 100
+    # 开启confirms回调 P -> Exchange
+    publisher-confirms: true
+    # 开启returnedMessage回调 Exchange -> Queue
+    publisher-returns: true

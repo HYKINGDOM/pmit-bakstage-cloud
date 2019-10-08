@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.galaxysoft.center</groupId>
+        <artifactId>pmit-service-communal</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <groupId>com.galaxysoft.center</groupId>
+    <artifactId>pmit-service-redis</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>pmit-service-redis</name>
+    <description>pmit service redis</description>
+    <packaging>jar</packaging>
+
+    <properties>
+        <java.version>1.8</java.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.session</groupId>
+            <artifactId>spring-session-data-redis</artifactId>
+            <version>2.1.7.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+            <version>2.1.7.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.58</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.session</groupId>
+            <artifactId>spring-session</artifactId>
+            <version>1.2.2.RELEASE</version>
+        </dependency>
+        <!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-autoconfigure</artifactId>-->
+<!--            <version>2.1.7.RELEASE</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-security</artifactId>-->
+<!--            <version>${spring-boot-starter-security.version}</version>-->
+<!--        </dependency>-->
+    </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <!--被依赖的公共模块必须加上这个，打包之后启动，选择后面带EXE的启动，依赖该模块的其他模块就不会因为找不到依赖而打包出错-->
+                    <classifier>exe</classifier>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

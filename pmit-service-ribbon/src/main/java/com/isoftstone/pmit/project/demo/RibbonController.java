@@ -1,4 +1,4 @@
-package com.isoftstone.pmit.project.demo;
+package com.galaxysoft.pmit.project.demo;
 
 
 import org.springframework.beans.factory.annotation.Autowired;

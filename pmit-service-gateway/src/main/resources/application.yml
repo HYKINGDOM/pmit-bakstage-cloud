@@ -1,0 +1,83 @@
+server:
+  port: 8762
+
+
+spring:
+  application:
+    name: pmit-service-gateway
+  profiles:
+    active: prod
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          # 是否与服务发现组件进行结合，通过serviceId转发到具体的服务实例。默认为false，为true代表开启基于服务发现的路由规则。
+          enabled: true
+          # 配置之后访问时无需大写
+          lower-case-service-id: true
+      routes:
+        #------------------------基础服务模块-------------
+        - id: pmit-service-oauth
+          uri: lb://pmit-service-oauth
+          predicates:
+            - Path= /pmit-oauth/**
+          filters:
+            # 对请求进行截断
+            - StripPrefix= 1
+        # -----------------------业务模块----------------
+        # mag-its-上传模块
+        - id: mag-its-upload-project
+          # 路由指向具体的服务实例
+          uri: lb://mag-its-upload-project
+          # 带指定请求头的URL转发到相应的服务实例
+          predicates:
+            - Path= /mag-its-upload/**
+          filters:
+            # 对请求进行截断
+            - StripPrefix= 1
+#            - name: Retry
+#              args:
+#                retries: 3
+#                fallbackUri: 'forward:/fallback'
+        # mag-its-下达模块
+        - id: mag-its-release-project
+          # 路由指向具体的服务实例
+          uri: lb://mag-its-release-project
+          # 带指定请求头的URL转发到相应的服务实例
+          predicates:
+            - Path= /mag-its-release/**
+          filters:
+            # 对请求进行截断
+            - StripPrefix= 1
+#            - name: Retry
+#              args:
+#                retries: 3
+#                statuses: BAD_GATEWAY
+        # 测试服务路由
+        - id: pmit-project-test-demo-8002
+          # 路由指向具体的服务实例
+          uri: lb://pmit-project-test-demo
+          # 带指定请求头的URL转发到相应的服务实例
+          predicates:
+            - Path= /pmit-project-test-demo/**
+          filters:
+            # 对请求进行截断
+            - StripPrefix= 1
+            - name: Retry
+              args:
+                retries: 3
+                statuses: BAD_GATEWAY
+  main:
+    allow-bean-definition-overriding: true
+
+
+
+logging:
+  level:
+    org.springframework.cloud.gateway: info
+
+# 启动后直接连接服务
+ribbon:
+  eager-load:
+    enabled: true
+    clients: pmit-service-oauth,mag-its-upload-project,mag-its-release-project

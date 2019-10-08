@@ -1,4 +1,4 @@
-package com.isoftstone.pmit.project;
+package com.galaxysoft.pmit.project;
 
 
 import de.codecentric.boot.admin.server.config.AdminServerProperties;

@@ -1,0 +1,230 @@
+version: "2"
+services:
+
+  Redis:
+    image: sameersbn/redis:latest
+    command: redis-server --requirepass pmit123
+    ports:
+      - "6379:6379"
+    volumes:
+      - /srv/docker/redis:/var/lib/redis:Z
+    restart: always
+    container_name: pmit-redis
+    hostname: pmit-redis
+
+  rabbitmq:
+    image: rabbitmq:management-alpine
+    container_name: rabbitmq
+    environment:
+      - RABBITMQ_DEFAULT_USER=pmit
+      - RABBITMQ_DEFAULT_PASS=pmit123
+    restart: always
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "200k"
+        max-file: "10"          
+
+  # -----------------mysql-主库----------------------
+#  pmit-mysql-master:
+#    command:
+#      --character-set-server=utf8mb4
+#      --collation-server=utf8mb4_general_ci
+#      --explicit_defaults_for_timestamp=true
+#      --lower_case_table_names=1
+#      --max_allowed_packet=128M
+#      --default-authentication-plugin=mysql_native_password
+#    build:
+#      context: ./
+#      dockerfile: db/mysql/Dockerfile
+#    environment:
+#      MYSQL_ROOT_PASSWORD: pmoit
+#      TZ: Asia/Shanghai
+#    restart: always
+#    container_name: pmit-mysql-master
+#    image: pmit-mysql-master
+#    ports:
+#      - "3339:3306"
+#
+#  # -----------------mysql-从库----------------------
+#  pmit-mysql-slave:
+#    command:
+#      --character-set-server=utf8mb4
+#      --collation-server=utf8mb4_general_ci
+#      --explicit_defaults_for_timestamp=true
+#      --lower_case_table_names=1
+#      --max_allowed_packet=128M
+#      --default-authentication-plugin=mysql_native_password
+#    build:
+#      context: ./
+#      dockerfile: db/mysql/Dockerfile
+#    environment:
+#      MYSQL_ROOT_PASSWORD: itsys
+#      TZ: Asia/Shanghai
+#    restart: always
+#    container_name: pmit-mysql-slave
+#    image: pmit-mysql-slave
+#    ports:
+#      - "3340:3306"
+
+  # -----------------基础服务----------------------
+  #注册中心
+  pmit-service-eureka:
+    build:
+      context: ./
+      dockerfile: ./pmit-service-eureka/Dockerfile
+    restart: always
+    ports:
+      - "8761:8761"
+    container_name: pmit-service-eureka
+    hostname: pmit-service-eureka
+    image: pmit-service-eureka
+    #    networks:
+    #      - eureka-net             #网络模式
+    environment:               #环境变量
+      SERVER_PORT: "8761"      #自定义参数用于给服务的配置文件传递参数
+    mem_limit: 350m            #设置容器最大内存
+
+  #网关
+  pmit-service-gateway:
+    build:
+      context: ./
+      dockerfile: ./pmit-service-gateway/Dockerfile
+    restart: always
+    ports:
+      - "8762:8762"
+    container_name: pmit-service-gateway
+    hostname: pmit-service-gateway
+    image: pmit-service-gateway
+    #    networks:
+    #      - eureka-net
+    mem_limit: 350m
+
+    #网关
+#  pmit-service-gateway-8763:
+#    build:
+#      context: ./
+#      dockerfile: ./pmit-service-gateway/Dockerfile
+#    restart: always
+#
+#    ports:
+#      - "8763:8762"
+#    container_name: pmit-service-gateway-8763
+#    hostname: pmit-service-gateway-8763
+#    image: pmit-service-gateway-8763
+#    #    networks:
+#    #      - eureka-net
+#    mem_limit: 350m
+
+  #鉴权模块
+  pmit-service-oauth:
+    build:
+      context: ./
+      dockerfile: ./pmit-service-oauth/Dockerfile
+    restart: always
+    ports:
+      - "8768:8768"
+    container_name: pmit-service-oauth
+    hostname: pmit-service-oauth
+    image: pmit-service-oauth
+    #    networks:
+    #      - eureka-net
+    mem_limit: 350m
+
+  pmit-service-oauth-8769:
+    build:
+      context: ./
+      dockerfile: ./pmit-service-oauth/Dockerfile
+    restart: always
+    ports:
+      - "8769:8768"
+    container_name: pmit-service-oauth-8769
+    hostname: pmit-service-oauth-8769
+    image: pmit-service-oauth-8769
+    #    networks:
+    #      - eureka-net
+    mem_limit: 350m
+
+  #监控模块
+  pmit-service-admin:
+    build:
+      context: ./
+      dockerfile: ./pmit-service-admin/Dockerfile
+    restart: always
+    ports:
+      - "8788:8788"
+    container_name: pmit-service-admin
+    hostname: pmit-service-admin
+    image: pmit-service-admin
+    #    networks:
+    #      - eureka-net
+    mem_limit: 300m
+
+
+    #------------------公共服务模块----------------------
+  pmit-service-mail:
+    build:
+      context: ./
+      dockerfile: ./pmit-service-communal/pmit-service-mail/Dockerfile
+    restart: always
+    ports:
+      - "8001:8001"
+    container_name: pmit-service-mail
+    hostname: pmit-service-mail
+    image: pmit-service-mail
+    #    networks:
+    #      - eureka-net
+    mem_limit: 300m
+
+
+  pmit-service-rabbitmq:
+    build:
+      context: ./
+      dockerfile: ./pmit-service-communal/pmit-service-rabbitmq/Dockerfile
+    restart: always
+    ports:
+      - "8011:8011"
+    container_name: pmit-service-rabbitmq
+    hostname: pmit-service-rabbitmq
+    image: pmit-service-rabbitmq
+    #    networks:
+    #      - eureka-net
+    mem_limit: 300m
+
+
+    # -----------------业务服务模块----------------------
+
+  pmit-project-test-demo-8002:
+    build:
+      context: ./
+      dockerfile: ./pmit-project-test-demo-8002/Dockerfile
+    restart: always
+    ports:
+      - "8002:8002"
+    container_name: pmit-project-test-demo-8002
+    hostname: pmit-project-test-demo-8002
+    image: pmit-project-test-demo-8002
+    #    networks:
+    #      - eureka-net
+    mem_limit: 300m
+
+  pmit-project-test-demo-8003:
+    build:
+      context: ./
+      dockerfile: ./pmit-project-test-demo-8002/Dockerfile
+    restart: always
+    ports:
+      - "8003:8002"
+    container_name: pmit-project-test-demo-8003
+    hostname: pmit-project-test-demo-8003
+    image: pmit-project-test-demo-8003
+#    networks:
+#      - eureka-net
+    mem_limit: 300m
+
+#networks:
+#  eureka-net:
+#    driver: "host"

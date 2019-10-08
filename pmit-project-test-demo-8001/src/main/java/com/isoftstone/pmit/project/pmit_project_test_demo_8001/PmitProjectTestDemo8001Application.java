@@ -1,4 +1,4 @@
-package com.isoftstone.pmit.project.pmit_project_test_demo_8001;
+package com.galaxysoft.pmit.project.pmit_project_test_demo_8001;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

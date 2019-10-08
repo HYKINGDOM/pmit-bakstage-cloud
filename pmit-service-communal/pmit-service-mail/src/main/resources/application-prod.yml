@@ -1,0 +1,47 @@
+
+
+#该服务绑定IP地址，启动服务器时如本机不是该IP地址则抛出异常启动失败，只有特殊需求的情况下才配置
+#server:
+#  address: 10.10.10.10
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    serviceUrl:
+      defaultZone: http://pmit:pmit@pmit-service-eureka:8761/eureka/
+
+spring:
+  mail:
+    host: smtp.*******.com
+    username: $$$$$$@$$$$$$.com
+    password: $$$$$$@$$$$$$
+    default-encoding: UTF-8
+    properties:
+      mail:
+        smtp:
+          auth: false
+          connectiontimeout: 5000
+          timeout: 3000
+          writetimeout: 5000
+
+  # freemarker配置
+  freemarker:
+    template-loader-path: /static/template/
+    suffix: flt
+    enabled: true
+    cache: false
+    charset: utf-8
+    content-type: text/html
+    allow-request-override: false
+    check-template-location: true
+    expose-request-attributes: false
+    expose-session-attributes: false
+    expose-spring-macro-helpers: false
+
+
+logging:
+  pattern:
+    level: INFO
+
+

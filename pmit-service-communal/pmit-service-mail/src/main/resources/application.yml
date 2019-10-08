@@ -1,0 +1,42 @@
+
+emailconfig:
+  emailAccount: 4321412341
+  emailPassword: 21342341234
+  myEmailSMTPHost: 42314123412
+  serverIP: 123412341234
+
+
+spring:
+  profiles:
+    active: prod
+  resources:
+    static-locations: classpath:/static/
+  application:
+    name: pmit-service-mail
+  security:
+    user:
+      name: admin
+      password: admin123
+  boot:
+    admin:
+      client:
+        username: admin
+        password: admin123
+        instance:
+          name: pmit-service-mail
+        url:
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: ALWAYS
+
+server:
+  port: 8001
+
+logging:
+  level:
+    root: info

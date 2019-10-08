@@ -1,4 +1,4 @@
-package com.isoftstone.pmit.project.pmit_project_test_demo_8001;
+package com.galaxysoft.pmit.project.pmit_project_test_demo_8001;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

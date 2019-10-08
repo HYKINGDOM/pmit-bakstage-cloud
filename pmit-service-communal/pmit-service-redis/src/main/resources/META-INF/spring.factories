@@ -1,0 +1,4 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+    com.center.pmit.redis.config.RedisUtil,\
+    com.center.pmit.redis.config.RedisSessionConfig,\
+    com.center.pmit.redis.config.RedisConfig

@@ -8,7 +8,7 @@
         <version>2.1.4.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.isoftstone.pmit.project</groupId>
+    <groupId>com.galaxysoft.pmit.project</groupId>
     <artifactId>pmit-service-feign</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>pmit-service-feign</name>
@@ -60,6 +60,43 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <includeSystemScope>true</includeSystemScope>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>1.0.0</version>
+                <configuration>
+                    <!--镜像仓库源-->
+                    <imageName>DockerPrefixDemo/${project.artifactId}</imageName>
+                    <!--docker配置文件的路径-->
+                    <!--<dockerDirectory>src/main/docker</dockerDirectory>-->
+                    <resources>
+                        <resource>
+                            <targetPath>/</targetPath>
+                            <directory>${project.build.directory}</directory>
+                            <include>${project.build.finalName}.jar</include>
+                        </resource>
+                    </resources>
+                </configuration>
             </plugin>
         </plugins>
     </build>

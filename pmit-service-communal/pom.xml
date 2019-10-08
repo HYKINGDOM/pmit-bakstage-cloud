@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.galaxysoft.pmit</groupId>
+        <artifactId>pmit-bakstage-cloud</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <groupId>com.galaxysoft.center</groupId>
+    <artifactId>pmit-service-communal</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <name>pmit-service-communal</name>
+    <description>Demo project for Spring Boot</description>
+
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>pmit-service-log</module>
+        <module>pmit-service-common</module>
+        <module>pmit-service-mail</module>
+        <module>pmit-service-redis</module>
+        <module>pmit-service-rabbitmq</module>
+        <module>pmit-service-common-sercurity</module>
+    </modules>
+
+
+</project>
