@@ -1,7 +1,6 @@
 package com.center.pmit.project.rabbitmq.service.email;
 
 
-import com.center.pmit.project.common.pojo.EmailObject;
 import com.center.pmit.project.common.util.JsonUtils;
 import com.rabbitmq.client.Channel;
 import lombok.extern.slf4j.Slf4j;
@@ -14,7 +13,6 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
 
 import static com.center.pmit.project.common.constant.RabbitMqConstants.RABBIT_QUEUES_SELF_CHECKING_SEND_EMAIL;
 

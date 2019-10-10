@@ -1,7 +1,6 @@
 package com.center.pmit.project.rabbitmq.controller;
 
 
-import com.center.pmit.project.common.pojo.EmailObject;
 import com.center.pmit.project.common.util.JsonUtils;
 import com.center.pmit.project.rabbitmq.service.email.EmailSender;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;

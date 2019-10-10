@@ -1,8 +1,5 @@
 
 
-
-server:
-  port: 8001
 eureka:
   instance:
     hostname: localhost
@@ -11,7 +8,17 @@ eureka:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
 
-
 spring:
   application:
-    name: pmit-project-test-demo
+    name: spring-project-test-8001
+server:
+  port: 8001
+
+
+
+security:
+  oauth2:
+    resource:
+      id: spring-project-test-8001
+      user-info-uri: http://localhost:8762/auth/api/member
+      prefer-token-info: false

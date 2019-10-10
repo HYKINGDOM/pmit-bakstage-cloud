@@ -7,11 +7,6 @@ package com.center.pmit.project.common.constant;
 public class Constants {
 
     /**
-     * 软通邮箱地址
-     */
-    public static final String ISOFT_EMAIL_ADDRESS = "@galaxysoft.com";
-
-    /**
      * 数据异常
      */
     public final static String DATA_EXCEPTION = "数据异常!,请检查数据!";

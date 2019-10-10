@@ -1,7 +1,6 @@
 package com.galaxysoft.center.project.config.service.impl;
 
 
-import com.center.pmit.project.common.pojo.EmailObject;
 import com.galaxysoft.center.project.config.queue.MailQueue;
 import com.galaxysoft.center.project.config.service.IMailService;
 import com.galaxysoft.center.project.config.util.EmailConstants;

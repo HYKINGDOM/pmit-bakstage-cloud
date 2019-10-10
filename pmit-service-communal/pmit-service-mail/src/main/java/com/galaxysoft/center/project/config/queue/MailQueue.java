@@ -1,7 +1,5 @@
 package com.galaxysoft.center.project.config.queue;
 
-import com.center.pmit.project.common.pojo.EmailObject;
-
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 

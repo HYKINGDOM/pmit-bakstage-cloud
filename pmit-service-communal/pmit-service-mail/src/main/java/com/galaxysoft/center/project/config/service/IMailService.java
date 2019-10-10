@@ -1,8 +1,6 @@
 package com.galaxysoft.center.project.config.service;
 
 
-import com.center.pmit.project.common.pojo.EmailObject;
-
 /**
  * @author Administrator
  */

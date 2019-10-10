@@ -1,6 +1,5 @@
 package com.galaxysoft.center.project.config.controller;
 
-import com.center.pmit.project.common.pojo.EmailObject;
 import com.center.pmit.project.common.util.JsonUtils;
 import com.center.pmit.project.common.web.controller.AbstractCustomResult;
 import com.galaxysoft.center.project.config.service.IMailService;
